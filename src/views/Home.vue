@@ -48,6 +48,11 @@
       <el-col>
         <el-table :data="tableData" stripe style="width: 100%">
           <el-table-column prop="datatype" label="数据集类型" width="320">
+            <template slot-scope="scope">
+              <router-link :to="{path:'/batch', query:{type:scope.row.datatype}}">
+                {{scope.row.datatype}}
+              </router-link>
+            </template>
           </el-table-column>
           <el-table-column prop="size" label="数据总量(GB)" width="260">
           </el-table-column>
@@ -77,7 +82,7 @@ export default {
   data() {
     return {
       tableData:[{
-        datatype: 'landsat8_toa',
+        datatype: 'landsat8_sr',
         size: '198245.23',
         scene: '129342',
         init: '10',
