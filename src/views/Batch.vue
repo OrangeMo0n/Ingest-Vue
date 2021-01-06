@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div>
+      <loading></loading>
+    </div>
     <el-row type="flex" align="bottom" :gutter="20">
       <el-col :span="4">
         <el-card shadow="always" style="text-align: center; font-size: 20px">
@@ -28,6 +31,11 @@
         >
           <el-table-column type="index" width="50"> </el-table-column>
           <el-table-column prop="batchID" label="批次任务id" width="320">
+            <template slot-scope="scope">
+              <router-link :to="{path:'/task', query:{type:scope.row.dataSourceType, id:scope.row.batchID}}">
+                {{scope.row.batchID}}
+              </router-link>
+            </template>
           </el-table-column>
           <el-table-column
             prop="status"
@@ -81,17 +89,25 @@
 </template>
 
 <script>
+import Loading from "./Loading";
+
 export default {
   name: "Batch",
+  components: { Loading },
   data() {
     return {
       batchData: [],
       dataType: "landsat7_toa",
+      isLoading: true,
     };
   },
   mounted() {
     let self = this;
     self.dataType = this.$route.query.type;
+    if (self.dataType == null || self.dataType == "") {
+      console.log(self.dataType);
+      self.dataType = "landsat7_toa";
+    }
     console.log(self.dataType);
     this.getQueryData();
   },
@@ -174,6 +190,10 @@ export default {
             self.batchData.push(repos.data.data[i]);
           }
         })
+        .then(function () {
+          //self.isLoading = false;
+          console.log("加载完成，隐藏loading图片");
+        })
         .catch(function (error) {
           console.log(error);
         });
@@ -200,5 +220,13 @@ export default {
 }
 .el-table >>> .unkown-cell {
   background: #ffffff;
+}
+.fade-center,
+.fade-leave-active {
+  opacity: 0;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 </style>

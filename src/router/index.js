@@ -4,6 +4,8 @@ import Login from '../views/Login'
 import Main from "../views/Main"
 import Home from "../views/Home"
 import Batch from "../views/Batch"
+import Task from "../views/Task"
+import Loading from '../views/Loading'
 
 Vue.use(Router)
 
@@ -31,5 +33,17 @@ export default new Router({
         path: '/batch',
         name: 'Batch',
         component: Batch
+    },
+    {
+        // Task页面
+        path: '/task',
+        name: 'Task',
+        component: Task
+    },
+    {
+        // Loading页面
+        path: '/loading',
+        name: 'Loading',
+        component: Loading
     }]
 })
