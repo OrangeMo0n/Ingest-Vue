@@ -8,11 +8,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .loading {
-  background: url("../assets/logo.png") center center no-repeat #00ff00;
-  width: 1200px;
-  height: 1200px;
-  background-size: 200px auto;
-  display: inline-block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: url("../assets/loading.svg") center center no-repeat #fff;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
 }
+</style>

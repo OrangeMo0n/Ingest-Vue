@@ -1,7 +1,9 @@
 <template>
   <div>
     <div>
-      <loading></loading>
+      <transition name="fade">
+        <loading v-if="isLoading"></loading>
+      </transition>
     </div>
     <el-row type="flex" align="bottom" :gutter="20">
       <el-col :span="4">
@@ -32,8 +34,16 @@
           <el-table-column type="index" width="50"> </el-table-column>
           <el-table-column prop="batchID" label="批次任务id" width="320">
             <template slot-scope="scope">
-              <router-link :to="{path:'/task', query:{type:scope.row.dataSourceType, id:scope.row.batchID}}">
-                {{scope.row.batchID}}
+              <router-link
+                :to="{
+                  path: '/task',
+                  query: {
+                    type: scope.row.dataSourceType,
+                    id: scope.row.batchID,
+                  },
+                }"
+              >
+                {{ scope.row.batchID }}
               </router-link>
             </template>
           </el-table-column>
@@ -191,7 +201,7 @@ export default {
           }
         })
         .then(function () {
-          //self.isLoading = false;
+          self.isLoading = false;
           console.log("加载完成，隐藏loading图片");
         })
         .catch(function (error) {
