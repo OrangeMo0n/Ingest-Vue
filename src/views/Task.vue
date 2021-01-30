@@ -1,9 +1,14 @@
 <template>
   <div>
     <el-row type="flex" align="bottom" :gutter="20">
-      <el-col :span="4">
+      <el-col :span="8">
         <el-card shadow="always" style="text-align: center; font-size: 20px">
-          {{ batchID }} + " ---- " {{ dataType }}
+          <div slot="header">
+            <span>Batch ID: {{ batchID }}</span>
+          </div>
+          <div>
+            <span>类型: {{ dataType }}</span>
+          </div>
         </el-card>
       </el-col>
       <el-col :span="6" :offset="14">
